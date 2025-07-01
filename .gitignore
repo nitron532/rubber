@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.venv
+venv/
+*.log
+*.aux
+*.pdf
+*.synctex.gz
+backend/texlive/texmf-var/
+backend/texlive/tlpkg/backups/
