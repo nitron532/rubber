@@ -1,0 +1,8 @@
+name a2ping.windows
+category TLCore
+revision 65891
+shortdesc windows files of a2ping
+containersize 2308
+containerchecksum 23d832798dfff3b08e4624a8f3fbe62579523ba38155b7bcb4817a31aef3fc6b47fc0d5e54281f7fb650feba421f096faee052d72fbe80826050a2b234009541
+binfiles arch=windows size=2
+ bin/windows/a2ping.exe

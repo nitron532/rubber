@@ -1,0 +1,30 @@
+name 12many
+category Package
+revision 15878
+catalogue one2many
+shortdesc Generalising mathematical index sets
+longdesc In the discrete branches of mathematics and the computer
+longdesc sciences, it will only take some seconds before you're faced
+longdesc with a set like {1,...,m}. Some people write $1\ldotp\ldotp m$,
+longdesc others $\{j:1\leq j\leq m\}$, and the journal you're submitting
+longdesc to might want something else entirely. The 12many package
+longdesc provides an interface that makes changing from one to another a
+longdesc one-line change.
+containersize 2104
+containerchecksum 57a177b65450718631f36bfd8db0f2d1bff788f3bf147137b6412714cc945c7e08832f14f9e7e659adf7e072a91f13a2ea27fe3161cd9b60313bc956f1f543c6
+doccontainersize 375412
+doccontainerchecksum 9ce7fdae151a116ef6b22943bcbd1e94b90862baa5d50f54a00105d1f2d623f75a2e1440c3c49c560e2e6c5baddb8a6772753f400165b63a90a84f540e3fa381
+docfiles size=98
+ texmf-dist/doc/latex/12many/12many.pdf details="Package documentation"
+ texmf-dist/doc/latex/12many/README details="Readme"
+srccontainersize 6592
+srccontainerchecksum f007dcaccb364964a73da6a09db5e6a25ee401d8108b19021b67023af273f486392cef6a0b01e951e9fa885304d0e157b919cbd6abc472a96dfbbb0f432b8530
+srcfiles size=6
+ texmf-dist/source/latex/12many/12many.dtx
+ texmf-dist/source/latex/12many/12many.ins
+runfiles size=1
+ texmf-dist/tex/latex/12many/12many.sty
+catalogue-ctan /macros/latex/contrib/12many
+catalogue-license lppl
+catalogue-topics maths
+catalogue-version 0.3
