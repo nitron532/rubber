@@ -1,0 +1,39 @@
+%%
+%% This is file `test_draftwatermark-4.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% draftwatermark.dtx  (with options: `samplecode-dynamic')
+%% 
+\documentclass{article}
+\usepackage[svgnames]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage[color=red, fontsize=32pt]{draftwatermark}
+\usepackage{mathptmx}
+\usepackage{lipsum}
+\title{Sample document for the draftwatermark package}
+\author{}
+
+\DraftwatermarkOptions{%
+  angle=0,
+  text={\ifodd\thepage ODD\else EVEN\fi},
+  hpos={\ifodd\thepage \dimexpr\paperwidth-5mm\else 5mm\fi},
+  vpos=5mm,
+  vanchor=t,
+  hanchor={\ifodd\thepage r\else l\fi}
+}
+
+\begin{document}
+\maketitle
+
+\section{One}
+\lipsum[1-3]
+
+\section{Two}
+\lipsum[4-6]
+
+\end{document}
+\endinput
+%%
+%% End of file `test_draftwatermark-4.tex'.

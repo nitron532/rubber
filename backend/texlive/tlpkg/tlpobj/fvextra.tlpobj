@@ -1,0 +1,29 @@
+name fvextra
+category Package
+revision 75355
+shortdesc Extensions and patches for fancyvrb
+longdesc This package provides several extensions to fancyvrb, including
+longdesc automatic line breaking and improved math mode. It also patches
+longdesc some fancyvrb internals. Parts of fvextra were originally
+longdesc developed as part of pythontex and minted.
+depend fancyvrb
+containersize 16908
+containerchecksum 10d0cfc279ae39764e082a880fdbd9e9ce93ff4e45f5e7ddfafd59ea95046b16ff1dc194554e9c3fffff60dbb5951fa935f55d483838b8903239ec5b06961c00
+doccontainersize 908220
+doccontainerchecksum bb8f9c48deec4edb4ab2711be1e8cb9916c36848744e6986641da3959721d1b7fde1bee1a41ce6fc57c5c51357efc1483ec87e08c8f1fadcf846aa6497971c1e
+docfiles size=233
+ texmf-dist/doc/latex/fvextra/CHANGELOG.md
+ texmf-dist/doc/latex/fvextra/README details="Readme"
+ texmf-dist/doc/latex/fvextra/fvextra.pdf details="Package documentation"
+srccontainersize 66080
+srccontainerchecksum 5a7b4084d511f06661c978b8d9eb965afd8f602b8acad7de92ed54a0a5b6806791c2ef8f463c99ccea4730c0a45a8951bd2ecbca42baac2800fd344544b737fc
+srcfiles size=92
+ texmf-dist/source/latex/fvextra/fvextra.dtx
+ texmf-dist/source/latex/fvextra/fvextra.ins
+runfiles size=32
+ texmf-dist/tex/latex/fvextra/fvextra.sty
+catalogue-contact-home https://github.com/gpoore/fvextra
+catalogue-ctan /macros/latex/contrib/fvextra
+catalogue-license lppl1.3
+catalogue-topics verbatim
+catalogue-version 1.13.2

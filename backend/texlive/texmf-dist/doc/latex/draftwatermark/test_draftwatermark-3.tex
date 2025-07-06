@@ -1,0 +1,33 @@
+%%
+%% This is file `test_draftwatermark-3.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% draftwatermark.dtx  (with options: `samplecode-anchor')
+%% 
+\documentclass{article}
+\usepackage[svgnames]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage[firstpage, anchor=tr, color=red,
+  pos={\dimexpr\paperwidth-5mm, 5mm},
+  angle=-45, fontsize=32pt]{draftwatermark}
+\usepackage{mathptmx}
+\usepackage{lipsum}
+\title{Sample document for the draftwatermark package}
+\author{}
+
+\DraftwatermarkOptions{text=\bfseries DRAFT}
+\begin{document}
+\maketitle
+
+\section{One}
+\lipsum[1-3]
+
+\section{Two}
+\lipsum[4-6]
+
+\end{document}
+\endinput
+%%
+%% End of file `test_draftwatermark-3.tex'.

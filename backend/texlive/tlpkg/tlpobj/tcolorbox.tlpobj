@@ -1,0 +1,95 @@
+name tcolorbox
+category Package
+revision 75393
+shortdesc Coloured boxes, for LaTeX examples and theorems, etc
+longdesc This package provides an environment for coloured and framed
+longdesc text boxes with a heading line. Optionally, such a box may be
+longdesc split in an upper and a lower part; thus the package may be
+longdesc used for the setting of LaTeX examples where one part of the
+longdesc box displays the source code and the other part shows the
+longdesc output. Another common use case is the setting of theorems. The
+longdesc package supports saving and reuse of source code and text
+longdesc parts. The package depends on the pgf, verbatim, environ, and
+longdesc etoolbox packages.
+depend environ
+depend pgf
+depend tools
+containersize 234520
+containerchecksum e3355ea002c2a11864922fa3c51eea96c845184088253822374d035ba27d06b2ed9007c54108953c2e73784a021bc25eccb798b7402359a191738ba34b363835
+doccontainersize 4732208
+doccontainerchecksum 6650a5826ac12a1bae8164c4b75ccd1f9db79152f30398c2b8a9fe6abeaecb8fe935c66b27a6e27a55d685dda7251c2121ef41e72ee23da04c45445ffa8c7cf8
+docfiles size=1649
+ texmf-dist/doc/latex/tcolorbox/Basilica_5.png
+ texmf-dist/doc/latex/tcolorbox/CHANGELOG.md
+ texmf-dist/doc/latex/tcolorbox/README.md details="Readme"
+ texmf-dist/doc/latex/tcolorbox/lichtspiel.jpg
+ texmf-dist/doc/latex/tcolorbox/tcolorbox-example-poster.pdf
+ texmf-dist/doc/latex/tcolorbox/tcolorbox-example-poster.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox-example.pdf details="Examples of use"
+ texmf-dist/doc/latex/tcolorbox/tcolorbox-example.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox-tutorial-poster.pdf details="Tutorial: Poster creation with tcolorbox"
+ texmf-dist/doc/latex/tcolorbox/tcolorbox-tutorial-poster.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.abstract.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.beamer.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.bib
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.breakable.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.coremacros.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.coreoptions.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.documentation.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.external.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.filling.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.fitting.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.graphics.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.hooks.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.index.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.initoptions.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.intro.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.listings.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.magazine.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.picturecredits.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.poster.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.quickref.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.raster.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.recording.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.references.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.s_main.sty
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.s_snippet.sty
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.sidebyside.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.skincatalog.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.skins.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.technical.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.theorems.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.verbatim.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.vignette.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.doc.xparse.tex
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.pdf details="Package documentation"
+ texmf-dist/doc/latex/tcolorbox/tcolorbox.tex
+runfiles size=151
+ texmf-dist/tex/latex/tcolorbox/blueshade.png
+ texmf-dist/tex/latex/tcolorbox/crinklepaper.png
+ texmf-dist/tex/latex/tcolorbox/goldshade.png
+ texmf-dist/tex/latex/tcolorbox/pink_marble.png
+ texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbdocumentation.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbexternal.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbfitting.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbhooks.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcblistings.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcblistingscore.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcblistingsutf8.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbmagazine.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbminted.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbposter.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbprocessing.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbraster.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbtheorems.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbvignette.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcbxparse.code.tex
+ texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+catalogue-contact-bugs https://github.com/T-F-S/tcolorbox/issues
+catalogue-ctan /macros/latex/contrib/tcolorbox
+catalogue-license lppl1.3
+catalogue-topics boxing box-breaking colour verbatim listing macro-demo
+catalogue-version 6.6.0

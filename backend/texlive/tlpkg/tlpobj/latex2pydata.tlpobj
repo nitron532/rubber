@@ -1,0 +1,31 @@
+name latex2pydata
+category Package
+revision 74766
+shortdesc Write data to file in Python literal format
+longdesc This package writes data to file using Python literal syntax.
+longdesc The data may be loaded safely in Python using the
+longdesc ast.literal_eval() function or the latex2pydata Python package.
+longdesc The data can also be hashed within LaTeX (mdfivesum) so that it
+longdesc is possible to check for the existence of external cached
+longdesc content generated with the data.
+containersize 3952
+containerchecksum 24133a63ade62244221a5456b6e56e648511e4a1f4c2aba1797a359c8bd5dff9a0880d8eed6ab9e6359c9195a932193de59cb30ce1b5883da980810f7c392941
+doccontainersize 317844
+doccontainerchecksum bfe850ae46ad3bb4582dd84728dea2f42c5004daddc042b56ed1aa3cae0c30e3ca00e548449b674b766c87535a65215dac921fa1b4d40c0fedc08e61fe8a624f
+docfiles size=81
+ texmf-dist/doc/latex/latex2pydata/CHANGELOG.md
+ texmf-dist/doc/latex/latex2pydata/README details="Readme"
+ texmf-dist/doc/latex/latex2pydata/latex2pydata.pdf details="Package documentation"
+srccontainersize 13308
+srccontainerchecksum 4b869ad747d6d0e52fb8c3ddfa157b4ec7faa268a71068883bf92d9d576dd08846f0ab7885e8ccb42ec93eedd1a4a98bd727795c94948fe1051ee2185a51ca94
+srcfiles size=16
+ texmf-dist/source/latex/latex2pydata/latex2pydata.dtx
+ texmf-dist/source/latex/latex2pydata/latex2pydata.ins
+runfiles size=5
+ texmf-dist/tex/latex/latex2pydata/latex2pydata.sty
+catalogue-contact-bugs https://github.com/gpoore/latex2pydata/issues
+catalogue-contact-repository https://github.com/gpoore/latex2pydata
+catalogue-ctan /macros/latex/contrib/latex2pydata
+catalogue-license lppl1.3c
+catalogue-topics data-manip
+catalogue-version 0.6.0

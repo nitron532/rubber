@@ -1,0 +1,8 @@
+name minted.windows
+category Package
+revision 72375
+shortdesc windows files of minted
+containersize 2304
+containerchecksum fa7960196fcbf0b01e8da48cadfb17c9b18bf3886e86a3988d2dd6831ea2322d4ed3b894fc616a5a978ae68d7e72e0f616d6fdd2bf51aa7d2eeb03da54ebea6c
+binfiles arch=windows size=2
+ bin/windows/latexminted.exe
