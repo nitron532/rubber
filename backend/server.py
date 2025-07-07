@@ -1,20 +1,30 @@
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
+from werkzeug.utils import secure_filename
 import subprocess
 import os
 
 
 app = Flask(__name__)
-@app.route('/') #might want to link this function to a button call from front end instead of onload of /
-def test():
-    # return jsonify({"rah": "hello world"})
+CORS(app, origins = "http://localhost:5173") 
+@app.route('/submit', methods = ['POST'])
+def compile():
+    file = request.files['file']
+    filename = secure_filename(file.filename)
+    destination="/".join(["./files", filename])
+    file.save(destination)
+    with open(f"./files/template.tex", 'r') as f:
+        data = f.readlines()
+    data[6] = f'\\input{{{filename}}}\n'
+    with open(f"./files/template.tex", 'w') as f:
+        f.writelines(data)
     tryTex = subprocess.run(
         ["./texlive/bin/windows/pdflatex", "-interaction=nonstopmode", "template.tex"],
         cwd="./files",
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
-    other_files = [x for x in os.listdir("./files") if x != '150.tex' and x!='template.tex' and x != '157.tex']
+    other_files = [x for x in os.listdir("./files") if x!='template.tex']
     pdf = True if "template.pdf" in other_files else False
     for file in other_files:
         os.remove(f"./files/{file}")
