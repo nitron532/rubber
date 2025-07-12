@@ -1,4 +1,3 @@
-import * as React from 'react';
 import axios from "axios"
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -15,22 +14,26 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
-
+interface Props {
+  onResponse: (data: any) => void; // ideally type the data better
+}
 //handling for submitting multiple files needed?
-const sendFile = async (event) =>{
+
+const InputFileUpload: React.FC<Props> = ({onResponse}) => {
+  const sendFile = async (event: any) =>{
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('file', file);
     axios.post('http://127.0.0.1:5000/submit', formData)
     .then(response => {
       console.log(response);
+      onResponse(response)
     })
     .catch(error => {
       console.error(error);
+      onResponse(error)
     });
 }
-
-export default function InputFileUpload() {
   return (
     <Button
       component="label"
@@ -39,12 +42,13 @@ export default function InputFileUpload() {
       tabIndex={-1}
       startIcon={<CloudUploadIcon />}
     >
-      Upload files
+      Upload Latex File
       <VisuallyHiddenInput
         type="file"
         onChange={(event) => sendFile(event)}
-        multiple
       />
     </Button>
   );
 }
+
+export default InputFileUpload;
