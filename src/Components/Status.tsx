@@ -34,6 +34,14 @@ const Status: React.FC<Props> = ({data}) => {
                 </Alert>
             );
         }
+        else{
+            message = "Something went wrong."
+            return (
+                <Alert id = "alert" icon={<CheckIcon fontSize="inherit" />} severity="error">
+                {message}
+                </Alert>
+            );
+        }
     }
 }
 
