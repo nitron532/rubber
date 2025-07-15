@@ -31,3 +31,4 @@ venv/
 *.synctex.gz
 backend/texlive/texmf-var/
 backend/texlive/tlpkg/backups/
+__pycache__/

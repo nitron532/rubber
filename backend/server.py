@@ -3,6 +3,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import subprocess
 import os
+from checker import check
 
 
 app = Flask(__name__)
@@ -13,8 +14,7 @@ def compile():
     file = request.files['file']
     filename = secure_filename(file.filename)
     root,extension = os.path.splitext(filename)
-    result = {"compiled": "unknown", "out": "none", "err": "none", "name":filename}
-    print(extension)
+    result = {"compiled": "unknown", "out": "none", "err": "none", "name":filename, "followsFormat": "unknown"}
     if extension != ".tex":
         result["compiled"] = "no"
         result["err"] = "this isn't a latex file..."
@@ -35,13 +35,15 @@ def compile():
     )
     other_files = [x for x in os.listdir("./files") if x!='template.tex']
     pdf = True if "template.pdf" in other_files else False
-    for file in other_files:
-        os.remove(f"./files/{file}")
     result["compiled"] = "yes" if pdf else "no"
     #should probably remove all the crap in stderror if there is an error so it can be condensed, but keep full error in case needed
     if not pdf:
         result["out"] = tryTex.stdout.decode("utf-8")
         result["err"] = tryTex.stderr.decode("utf-8")
+    if result["compiled"] == "yes":
+        check(os.path.join("files", filename))
+    for file in other_files:
+        os.remove(f"./files/{file}")
     return jsonify(result)
 
 
