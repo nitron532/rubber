@@ -7,7 +7,7 @@ from checker import check
 
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 8 * 1024
 CORS(app, origins = "http://localhost:5173") 
 @app.route('/submit', methods = ['POST'])
 def compile():
@@ -41,7 +41,7 @@ def compile():
         result["out"] = tryTex.stdout.decode("utf-8")
         result["err"] = tryTex.stderr.decode("utf-8")
     if result["compiled"] == "yes":
-        check(os.path.join("files", filename))
+        tree = check(os.path.join("files", filename)) #returns boolean
     for file in other_files:
         os.remove(f"./files/{file}")
     return jsonify(result)
