@@ -93,6 +93,5 @@ def displayInOrder(s, indent =0):
                 displayInOrder(section,indent)
                 """
 
-# scp <your_name>@csil.cs.ucsb.edu:/cs/student/jrc974/new_repo/* .
 
 
