@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 import subprocess
 import os
 from checker import check
-
+passedCheck = True
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 8 * 1024
@@ -41,9 +41,11 @@ def compile():
         result["out"] = tryTex.stdout.decode("utf-8")
         result["err"] = tryTex.stderr.decode("utf-8")
     if result["compiled"] == "yes":
-        tree = check(os.path.join("files", filename)) #returns boolean
+        global passedCheck
+        passedCheck = check(os.path.join("files", filename)) #returns boolean
     for file in other_files:
         os.remove(f"./files/{file}")
+    result["followsFormat"] = passedCheck
     return jsonify(result)
 
 

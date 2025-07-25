@@ -2,6 +2,9 @@ import json
 from TexSoup import TexSoup
 environments = ["solution", "Solution", "verbatim", "Verbatim", "answerArea", "AnswerArea"]
 commands = ["item", "Item", "vspace"]
+passedCheck = True
+answerAreaCount = 0 #needs to have a vspace in it
+solutionCount = 0
 """
 store envs / commands in a dict (to support nested characteristic)
 this way i can easily check if an environment contains something / doesn't contain something
@@ -24,54 +27,64 @@ def displayInOrder(d, indent=0): # for test purposes
         else:
             print(" " * (indent + 4) + str(value))
 
+def checkTree(tree):
+    global passedCheck, answerAreaCount, solutionCount
+    for key,value in tree.items():
+        if key == "AnswerArea":
+            answerAreaCount+=1
+            if "vspace" not in value: #\\vspace should be a key to an empty dict
+                #guidelines mention another option of answerArea, will need to consider this (non empty space)
+                print("vspace not found")
+                passedCheck = False
+                break
+        elif key == "Solution":
+            solutionCount+=1
+        if isinstance(value, dict):
+            checkTree(value)
 
 
 def check(pa):
+    global answerAreaCount, solutionCount
+    answerAreaCount = 0
+    solutionCount = 0
     with open(pa) as p:
         soup = TexSoup(p.read())
         tree = storeAsDict(soup)
         if not tree:
             return False #empty dict
-        """
         for section in tree:
-            if section != "\\item":
+            if section != "item":
+                print("item not found")
                 return False
             break
             #one pass loop to iterate through tree in order of insertion (item has to be first ), allow code env in item (For variables in question description)
-        answerAreaCount = 0 #needs to have a vspace in it
+        checkTree(tree)
+        if answerAreaCount != 1 or solutionCount != 1:
+            print(answerAreaCount)
+            print(solutionCount)
+            return False
+        answerAreaCount = 0
         solutionCount = 0
-        for section in tree:
-            if section == "\\answerArea":
-                answerAreaCount+=1
-                if "\\vspace" not in section["\\answerArea"]: #\\vspace should be a key to an empty dict
-                    #guidelines mention another option of answerArea, will need to consider this (non empty space)
-                    return False
-            elif section == "\\Solution":
-                solutionCount+=1
-        return True
-        """
-        return tree
-
-test = check("files\\181.tex")
-displayInOrder(test)
+        return passedCheck #could return more info since i already have specific error checks
 
 
 """
 !!needs multiple file input!!
 process:
 check guideline in here:
-actual guideline checking stays inside of this file
-return response (yes or no) in JSON to server.py
-server will append checker result to response object and send to frontend
+actual guideline checking stays inside of this file !done
+return response (yes or no) to server.py !done
+server will append checker result to response object and send to frontend !done
 
 guidelines:
-certain amount of specific environments (must be specific amount or fail check)
+certain amount of specific environments (must be specific amount or fail check) !done
 if any deprecated/banned environments found (question, code outside of item) fail check
 somehow fail vertical spaces instead of using the vspace command
 
 must begin with item command
 only one solution environment
-only one answer environment, which should(?) have a vspace command in it
+only one answer environment, red flag if a bunch of newlines are used instead of vspace
+if code{} found, check for whitespace or long length to raise red flag
 
 """
 
