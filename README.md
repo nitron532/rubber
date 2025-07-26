@@ -1,4 +1,6 @@
-<h1>UCSB Embedded Ethics research with Professor Majedi</h1>
+<h1>Rubber</h1>
+<p>UCSB Embedded Ethics lab research project</p>
+<p>By Alvin Lee </p>
 <p>Web based LaTex compiler and guideline checker for teaching team's submitted questions!</p>
 <hr>
 Technologies used: <br>
