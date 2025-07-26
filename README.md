@@ -6,6 +6,6 @@
 Technologies used: <br>
 <strong>TexLive / PDFLatex </strong> used for LaTex compilation <br>
 <strong>Python </strong> used for backend scripting and guideline checking logic <br>
-  -TexSoup for parsing latex files <br>
-  -Flask for backend <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-TexSoup for parsing latex files <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-Flask for backend <br>
 <strong>React Typescript and Vite </strong> for frontend <br>
