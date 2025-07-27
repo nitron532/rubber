@@ -1,21 +1,23 @@
 from TexSoup import TexSoup
 passedCheck = True
 envCount = {}
-"""
-store envs / commands in a dict (to support nested characteristic)
-this way i can easily check if an environment contains something / doesn't contain something
-once stored in a dict, check() itself will see if it passes, then return the status to server.py
-base level of dict can be treated as document environment since every file lives inside document env from template.tex
-"""
-def storeAsDict(s): #ignores BraceGroup inside verbatim for code
-    global envCount
+
+#base level of dict can be treated as document environment since every file lives inside document env from template.tex
+
+def storeAsDict(s):
+    global envCount, passedCheck
     structure = {}
     for section in s.contents:
-        #store text from code{} so I can check it in check()
         if hasattr(section, 'name') and section.name != "BraceGroup":
             envCount.setdefault(section.name, 0)
             envCount[section.name]+=1
-            if envCount[section.name] > 1:
+            if section.name == "code":
+                if any(c.isspace() for c in section.contents[0]):
+                    print(section.contents)
+                    passedCheck = False
+                    return 
+                structure[f"{section.name}{envCount[section.name]}"] = section.contents
+            elif envCount[section.name] > 1:
                 structure[f"{section.name}{envCount[section.name]}"] = storeAsDict(section)
             else:
                 structure[f"{section.name}1"] = storeAsDict(section)
@@ -30,8 +32,9 @@ def displayInOrder(d, indent=0): # for test purposes
             print(" " * (indent + 4) + str(value))
 
 def checkTree(tree): 
-#this will grow as i add more requirements ( next one to do is code{} and what it contains, length? whitespace? to 
-# check if its just used for question description or (bad) in place of verbatim)
+#this will grow as i add more requirements
+#if vspace is inside a solution (lowercase?) env, flag it as bad?
+#new lines used instead of vspace is bad
     global passedCheck
     #might wanna split these conditions
     if "AnswerArea" not in envCount or "Solution" not in envCount:
@@ -43,10 +46,10 @@ def checkTree(tree):
         passedCheck = False
         return
     for key,value in tree.items():
-        if key.contains("AnswerArea") and not value:
+        if "AnswerArea" in key and not value:
             passedCheck = False
             return
-        elif key.contains("Question"):
+        elif "Question" in key:
             passedCheck = False
             return
         if isinstance(value, dict):
@@ -54,20 +57,31 @@ def checkTree(tree):
 
 
 def check(pa):
+    global passedCheck
+    global envCount
+    #here, globals are reset each time check() is called (per file upload), 
+    # so i don't need to reset them in helper functions which access globals since they've been reset before calling helpers
+    envCount = {}
+    passedCheck = True
     with open(pa) as p:
         soup = TexSoup(p.read())
         tree = storeAsDict(soup)
-        print(tree)
         if not tree:
-            return False #empty dict
+            print("empty tex file")
+            return False 
+        elif not passedCheck:
+            print("invalid use of code env (found a whitespace, code env should only be used to describe variables or functions in question description. Use verbatim for question code)")
+            return False
         #one pass loop to iterate through tree in order of insertion (item has to be first )
-        for section in tree:
-            if section != "item1":
+        for key,value in tree.items():
+            print(key)
+            if key != "item1":
                 print("item not found")
                 return False
             break
         checkTree(tree)
         return passedCheck #could return more info since i already have specific error checks
+    #maybe instead of passing a boolean i pass an object with boolean yes no passed check and a little error message since i print them out here already
 
 
 """
@@ -78,16 +92,6 @@ actual guideline checking stays inside of this file !done
 return response (yes or no) to server.py !done
 server will append checker result to response object and send to frontend !done
 front end needs to display followsFormat status
-
-guidelines:
-certain amount of specific environments (must be specific amount or fail check) !done
-if any deprecated/banned environments found (question, code outside of item) fail check !done
-somehow fail vertical spaces instead of using the vspace command
-
-must begin with item command
-only one solution environment
-only one answer environment, red flag if a bunch of newlines are used instead of vspace
-if code{} found, check for whitespace or long length to raise red flag
 
 """
 

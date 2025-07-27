@@ -11,12 +11,14 @@ app.config['MAX_CONTENT_LENGTH'] = 8 * 1024
 CORS(app, origins = "http://localhost:5173") 
 @app.route('/submit', methods = ['POST'])
 def compile():
+    global passedCheck
+    passedCheck = True
     file = request.files['file']
     filename = secure_filename(file.filename)
     root,extension = os.path.splitext(filename)
-    result = {"compiled": "unknown", "out": "none", "err": "none", "name":filename, "followsFormat": "unknown"}
+    result = {"compiled": "unknown", "name":filename, "followsFormat": "unknown"}
     if extension != ".tex":
-        result["compiled"] = "no"
+        result["compiled"] = False
         result["err"] = "this isn't a latex file..."
         return jsonify(result)
     destination="/".join(["./files", filename])
@@ -35,13 +37,8 @@ def compile():
     )
     other_files = [x for x in os.listdir("./files") if x!='template.tex']
     pdf = True if "template.pdf" in other_files else False
-    result["compiled"] = "yes" if pdf else "no"
-    #should probably remove all the crap in stderror if there is an error so it can be condensed, but keep full error in case needed
-    if not pdf:
-        result["out"] = tryTex.stdout.decode("utf-8")
-        result["err"] = tryTex.stderr.decode("utf-8")
-    if result["compiled"] == "yes":
-        global passedCheck
+    result["compiled"] = True if pdf else False
+    if result["compiled"]:
         passedCheck = check(os.path.join("files", filename)) #returns boolean
     for file in other_files:
         os.remove(f"./files/{file}")

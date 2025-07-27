@@ -5,12 +5,12 @@ import type React from 'react';
 interface Props {
     data: any
 }
-const Status: React.FC<Props> = ({data}) => {
+const CompileStatus: React.FC<Props> = ({data}) => {
     if(data){
         let message;
         if(data.status == 200){
             let name = data.data.name
-            let severity = data.data.compiled === "yes" ? "success" : "error"
+            let severity = data.data.compiled === true ? "success" : "error"
             if(severity === "success"){
                 message = `${name} compiled succesfully!`
             }
@@ -46,4 +46,4 @@ const Status: React.FC<Props> = ({data}) => {
 }
 
 
-export default Status;
+export default CompileStatus;
