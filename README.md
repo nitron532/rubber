@@ -1,8 +1,11 @@
-UCSB Embedded Ethics research with Professor Majedi
-Web based LaTex compiler and guideline checker for teaching team's submitted questions!
-Technologies used:
-TexLive / PDFLatex used for LaTex compilation
-Python used for backend scripting and guideline checking logic
-  -TexSoup for parsing latex files
-  -Flask for backend
-Vite and React used for frontend (Typescript)
+<h1>Rubber</h1>
+<p>UCSB Embedded Ethics lab research project</p>
+<p>By Alvin Lee </p>
+<p>Web-based LaTex guideline checker</p>
+<hr>
+Technologies used: <br>
+<strong>TexLive / PDFLatex </strong> used for LaTex compilation <br>
+<strong>Python </strong> used for backend scripting and guideline checking logic <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-TexSoup for parsing latex files <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-Flask for backend <br>
+<strong>React Typescript and Vite </strong> for frontend <br>
