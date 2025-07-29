@@ -7,7 +7,6 @@ import './App.css'
 
 function App() {
   const [statusData, setStatusData] = useState<any>(null);
-  // const [count, setCount] = useState(0)
 
   return (
     <>

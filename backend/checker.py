@@ -13,7 +13,6 @@ def storeAsDict(s):
             envCount[section.name]+=1
             if section.name == "code":
                 if any(c.isspace() for c in section.contents[0]):
-                    print(section.contents)
                     passedCheck = False
                     return 
                 structure[f"{section.name}{envCount[section.name]}"] = section.contents
@@ -56,7 +55,7 @@ def checkTree(tree):
             checkTree(value)
 
 
-def check(pa):
+def check(pa):# should try to return bool instead of using global
     global passedCheck
     global envCount
     #here, globals are reset each time check() is called (per file upload), 
@@ -94,4 +93,3 @@ server will append checker result to response object and send to frontend !done
 front end needs to display followsFormat status
 
 """
-
