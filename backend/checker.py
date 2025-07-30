@@ -73,7 +73,7 @@ def check(pa):# should try to return bool instead of using global
             return False
         #one pass loop to iterate through tree in order of insertion (item has to be first )
         for key,value in tree.items():
-            print(key)
+            # print(key)
             if key != "item1":
                 print("item not found")
                 return False

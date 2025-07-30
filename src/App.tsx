@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import InputFileUpload from "./Components/InputFileUpload.tsx"
-import CompileStatus from "./Components/CompileStatus.tsx"
-import GuidelineStatus from "./Components/GuidelineStatus.tsx"
+import Status from "./Components/Status.tsx"
 import './App.css'
 
 
@@ -11,8 +10,7 @@ function App() {
   return (
     <>
     <InputFileUpload onResponse= {setStatusData}></InputFileUpload>
-    <CompileStatus data = {statusData}></CompileStatus>
-    <GuidelineStatus data = {statusData}></GuidelineStatus>
+    <Status data = {statusData}></Status>
     </>
   )
 }
