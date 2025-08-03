@@ -5,7 +5,7 @@ import subprocess
 import os
 from checker import check
 passedCheck = True
-
+otherFiles = []
 app = Flask(__name__)
 """
 this file size limit will need to vary depending on usage: for feeding to model, it will have to be large, as we are
@@ -15,7 +15,9 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 #16 MB
 CORS(app, origins = "http://localhost:5173") 
 @app.route('/submit', methods = ['POST'])
 def compile():
-    global passedCheck
+    #resets globals per compile
+    global passedCheck, otherFiles
+    otherFiles = []
     fileNameList = []
     compileList = []
     guidelineList = []
@@ -47,18 +49,24 @@ def compile():
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE
             )
-            other_files = [x for x in os.listdir("./files") if x!='template.tex'] #might wanna clean up after entire process is run instead of each time, clean up after returning statuses?
-            pdf = True if "template.pdf" in other_files else False
+            otherFiles = [x for x in os.listdir("./files") if x!='template.tex'] #might wanna clean up after entire process is run instead of each time, clean up after returning statuses?
+            pdf = True if "template.pdf" in otherFiles else False
             if pdf:
                 result["compiledFiles"].append(True)
             else:
                 result["compiledFiles"].append(False)
             if result["compiledFiles"][i]:
                 passedCheck = check(os.path.join("files", filename)) #returns boolean
-            for file in other_files:
-                os.remove(f"./files/{file}")
             result["passedFiles"].append(passedCheck)
     return jsonify(result)
+
+@app.route('/clean', methods = ['GET'])
+def clean():
+    global otherFiles
+    for file in otherFiles:
+        os.remove(f"./files/{file}")
+    return jsonify({"cleaned": "yes"})
+
 
 
 if __name__ == '__main__':

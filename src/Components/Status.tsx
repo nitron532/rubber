@@ -5,7 +5,7 @@ import type React from 'react';
 interface Props {
     data: any
 }
-const CompileStatus: React.FC<Props> = ({data}) => {
+const Status: React.FC<Props> = ({data}) => {
     if(data){
         const alerts: React.JSX.Element[] = [];
         let message;
@@ -14,6 +14,7 @@ const CompileStatus: React.FC<Props> = ({data}) => {
                 let isTex = true
                 let name = data.data.fileNames[i]
                 let severity = data.data.compiledFiles[i] === true ? "success" : "error"
+                let id = `${name}${i}Compile`
                 if(severity === "success"){
                     message = `${name} compiled succesfully!`
                 }
@@ -25,11 +26,12 @@ const CompileStatus: React.FC<Props> = ({data}) => {
                     isTex = false
                 }
                 alerts.push(
-                    <Alert id = "alert" icon={<CheckIcon fontSize="inherit" />} severity={severity as 'success' | 'error'}>
+                    <Alert key = {id} id = "alert" icon={<CheckIcon fontSize="inherit" />} severity={severity as 'success' | 'error'}>
                         {message}
                     </Alert>
                 )
                 if(isTex && data.data.compiledFiles[i]){
+                    id = `${name}${i}Guideline`
                     severity = data.data.passedFiles[i] === true ? "success" : "error"
                     if(severity === "success"){
                         message = `${name} follows formatting guidelines!`
@@ -39,7 +41,7 @@ const CompileStatus: React.FC<Props> = ({data}) => {
                         severity = "error"
                     }
                     alerts.push(
-                        <Alert id = "alert" icon={<CheckIcon fontSize="inherit" />} severity={severity as 'success' | 'error'}>
+                        <Alert key = {id} id = "alert" icon={<CheckIcon fontSize="inherit" />} severity={severity as 'success' | 'error'}>
                             {message}
                         </Alert>
                     )
@@ -51,7 +53,7 @@ const CompileStatus: React.FC<Props> = ({data}) => {
         else if(data.status == 413){
             message = "File(s) uploaded was too big, there is a 16 MB limit."
             return (
-                <Alert id = "alert" icon={<CheckIcon fontSize="inherit" />} severity="error">
+                <Alert key = "FileTooLarge" id = "alert" icon={<CheckIcon fontSize="inherit" />} severity="error">
                 {message}
                 </Alert>
             );
@@ -59,7 +61,7 @@ const CompileStatus: React.FC<Props> = ({data}) => {
         else{
             message = "Something went wrong."
             return (
-                <Alert id = "alert" icon={<CheckIcon fontSize="inherit" />} severity="error">
+                <Alert key = "SomeError" id = "alert" icon={<CheckIcon fontSize="inherit" />} severity="error">
                 {message}
                 </Alert>
             );
@@ -68,4 +70,4 @@ const CompileStatus: React.FC<Props> = ({data}) => {
 }
 
 
-export default CompileStatus;
+export default Status;
