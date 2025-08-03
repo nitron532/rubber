@@ -19,7 +19,8 @@ def compile():
     fileNameList = []
     compileList = []
     guidelineList = []
-    result = {"compiledFiles": compileList, "fileNames":fileNameList, "passedFiles": guidelineList}
+    errorList = []
+    result = {"compiledFiles": compileList, "fileNames":fileNameList, "passedFiles": guidelineList, "errors": errorList}
     
     for i in range(len(request.files)):
         passedCheck = True
@@ -29,31 +30,34 @@ def compile():
         root,extension = os.path.splitext(filename)
         if extension != ".tex":
             result["compiledFiles"].append(False)
-        destination="/".join(["./files", filename])
-        file.save(destination)
-        with open(f"./files/template.tex", 'r') as f:
-            data = f.readlines()
-        data[6] = f'\\input{{{filename}}}\n' #6th line is input env in template.tex
-        with open(f"./files/template.tex", 'w') as f:
-            f.writelines(data)
-        #might want to erase the write after this so there is no trace of write afterwards(security?)
-        tryTex = subprocess.run(
-            ["./texlive/bin/windows/pdflatex", "-interaction=nonstopmode", "template.tex"],
-            cwd="./files",
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
-        )
-        other_files = [x for x in os.listdir("./files") if x!='template.tex'] #might wanna clean up after entire process is run instead of each time
-        pdf = True if "template.pdf" in other_files else False
-        if pdf:
-            result["compiledFiles"].append(True)
+            result["passedFiles"].append(False)
+            result["errors"].append(f"{filename} isn't a latex file.")
         else:
-            result["compiledFiles"].append(False)
-        if result["compiledFiles"][i]:
-            passedCheck = check(os.path.join("files", filename)) #returns boolean
-        for file in other_files:
-            os.remove(f"./files/{file}")
-        result["passedFiles"].append(passedCheck)
+            destination="/".join(["./files", filename])
+            file.save(destination)
+            with open(f"./files/template.tex", 'r') as f:
+                data = f.readlines()
+            data[6] = f'\\input{{{filename}}}\n' #6th line is input env in template.tex
+            with open(f"./files/template.tex", 'w') as f:
+                f.writelines(data)
+            #might want to erase the write after this so there is no trace of write afterwards(security?)
+            tryTex = subprocess.run(
+                ["./texlive/bin/windows/pdflatex", "-interaction=nonstopmode", "template.tex"],
+                cwd="./files",
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE
+            )
+            other_files = [x for x in os.listdir("./files") if x!='template.tex'] #might wanna clean up after entire process is run instead of each time, clean up after returning statuses?
+            pdf = True if "template.pdf" in other_files else False
+            if pdf:
+                result["compiledFiles"].append(True)
+            else:
+                result["compiledFiles"].append(False)
+            if result["compiledFiles"][i]:
+                passedCheck = check(os.path.join("files", filename)) #returns boolean
+            for file in other_files:
+                os.remove(f"./files/{file}")
+            result["passedFiles"].append(passedCheck)
     return jsonify(result)
 
 

@@ -17,7 +17,6 @@ const VisuallyHiddenInput = styled('input')({
 interface Props {
   onResponse: (data: any) => void; // ideally type the data better
 }
-//handling for submitting multiple files needed?
 
 const InputFileUpload: React.FC<Props> = ({onResponse}) => {
   const sendFile = async (event: any) =>{
@@ -26,7 +25,6 @@ const InputFileUpload: React.FC<Props> = ({onResponse}) => {
       for (let i = 0; i < inputtedFiles.length; i++) {
         formData.append(`filesList[${i}]`, inputtedFiles[i]);
       }
-      //console.log(formData.get("filesList[1]"))
     axios.post('http://127.0.0.1:5000/submit', formData)
     .then(response => {
       console.log(response);
@@ -45,7 +43,7 @@ const InputFileUpload: React.FC<Props> = ({onResponse}) => {
       tabIndex={-1}
       startIcon={<CloudUploadIcon />}
     >
-      Upload Latex File
+      Upload Latex File(s)
       <VisuallyHiddenInput
         type="file"
         onChange={(event) => sendFile(event)}

@@ -33,7 +33,6 @@ def displayInOrder(d, indent=0): # for test purposes
 def checkTree(tree): 
 #this will grow as i add more requirements
 #if vspace is inside a solution (lowercase?) env, flag it as bad?
-#new lines used instead of vspace is bad
     global passedCheck
     #might wanna split these conditions
     if "AnswerArea" not in envCount or "Solution" not in envCount:

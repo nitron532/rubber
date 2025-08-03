@@ -11,35 +11,39 @@ const CompileStatus: React.FC<Props> = ({data}) => {
         let message;
         if(data.status == 200){
             for(let i = 0; i < data.data.fileNames.length; i++){ //assign key to each element to avoid console error
+                let isTex = true
                 let name = data.data.fileNames[i]
                 let severity = data.data.compiledFiles[i] === true ? "success" : "error"
                 if(severity === "success"){
                     message = `${name} compiled succesfully!`
                 }
-                else if(data.data.err != "this isn't a latex file..."){
+                else if(data.data.errors[i] != `${name} isn't a latex file.`){
                     message = `Could not compile ${name}`
                 }
-                // else{ err was removed from response object, i'll add it back later
-                //     message = `${name} isn't a latex file and can't be compiled!`
-                // }
-                alerts.push(
-                    <Alert id = "alert" icon={<CheckIcon fontSize="inherit" />} severity={severity as 'success' | 'error'}>
-                        {message}
-                    </Alert>
-                )
-                severity = data.data.passedFiles[i] === true ? "success" : "error"
-                if(severity === "success" && data.data.compiledFiles[i]){
-                    message = `${name} follows formatting guidelines!`
-                }
-                else{
-                    message = `${name} does not follow formatting guidelines!`
-                    severity = "error"
+                else{ 
+                    message = `${name} isn't a latex file and can't be compiled!`
+                    isTex = false
                 }
                 alerts.push(
                     <Alert id = "alert" icon={<CheckIcon fontSize="inherit" />} severity={severity as 'success' | 'error'}>
                         {message}
                     </Alert>
                 )
+                if(isTex && data.data.compiledFiles[i]){
+                    severity = data.data.passedFiles[i] === true ? "success" : "error"
+                    if(severity === "success"){
+                        message = `${name} follows formatting guidelines!`
+                    }
+                    else{
+                        message = `${name} does not follow formatting guidelines!`
+                        severity = "error"
+                    }
+                    alerts.push(
+                        <Alert id = "alert" icon={<CheckIcon fontSize="inherit" />} severity={severity as 'success' | 'error'}>
+                            {message}
+                        </Alert>
+                    )
+                }
             }
             
             return <>{alerts}</>
