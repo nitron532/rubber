@@ -1,5 +1,5 @@
 <h1>Rubber</h1>
-<p>UCSB Embedded Ethics lab research project</p>
+<p>UCSB EQUAL research project</p>
 <p>By Alvin Lee </p>
 <p>Web-based LaTex guideline checker</p>
 <hr>
