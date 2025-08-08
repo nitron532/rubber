@@ -44,9 +44,15 @@ def checkTree(tree):
         passedCheck = False
         return
     for key,value in tree.items():
-        if "AnswerArea" in key and not value:
-            passedCheck = False
-            return
+        if "AnswerArea" in key:
+            print(value)
+            if not value:
+                passedCheck = False
+                return
+            for subkey, subvalue in value.items():
+                if "verbatim" in subkey and len(subvalue.items()) == 0:
+                    passedCheck = False
+                    return
         elif "Question" in key:
             passedCheck = False
             return
@@ -54,7 +60,7 @@ def checkTree(tree):
             checkTree(value)
 
 
-def check(pa):# should try to return bool instead of using global
+def check(pa):
     global passedCheck
     global envCount
     #here, globals are reset each time check() is called (per file upload), 
@@ -79,16 +85,5 @@ def check(pa):# should try to return bool instead of using global
             break
         checkTree(tree)
         return passedCheck #could return more info since i already have specific error checks
-    #maybe instead of passing a boolean i pass an object with boolean yes no passed check and a little error message since i print them out here already
 
 
-"""
-!!needs multiple file input!!
-process:
-check guideline in here:
-actual guideline checking stays inside of this file !done
-return response (yes or no) to server.py !done
-server will append checker result to response object and send to frontend !done
-front end needs to display followsFormat status
-
-"""
