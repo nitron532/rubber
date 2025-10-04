@@ -59,7 +59,7 @@ const Status: React.FC<Props> = ({data}) => {
             );
         }
         else{
-            message = "Something went wrong."
+            message = "Something went wrong. If the file compiles on old repo, TexSoup had trouble parsing it."
             return (
                 <Alert key = "SomeError" id = "alert" icon={<CheckIcon fontSize="inherit" />} severity="error">
                 {message}

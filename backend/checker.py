@@ -70,6 +70,7 @@ def check(pa):
     with open(pa) as p:
         soup = TexSoup(p.read())
         tree = storeAsDict(soup)
+        # displayInOrder(tree)
         if not tree:
             print("empty tex file")
             return False 

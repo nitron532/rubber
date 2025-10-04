@@ -60,7 +60,12 @@ const InputFileUpload: React.FC<Props> = ({onResponse}) => {
       Upload Latex File(s)
       <VisuallyHiddenInput
         type="file"
-        onChange={(event) => sendFile(event)}
+        onChange={
+          (event) => {
+            sendFile(event);
+            event.target.value = "";
+          }
+        }
         multiple
       />
     </Button>
