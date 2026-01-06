@@ -1,0 +1,18 @@
+name a5comb
+category Package
+revision 17020
+shortdesc Support for a5 paper sizes
+longdesc Superceded by geometry.
+containersize 968
+containerchecksum 443548964eb48ec458942e97f0d6ceb698050a5d4dc83ad17a71db0f1d5085a2c8e73c3e8d9bdbb7ab7e6328d12e42a6ec05c4c7dd4247717f295fcd5da66423
+doccontainersize 91652
+doccontainerchecksum ee845d8b6a21271d2f0e4e6fd24c79a1235d24ba15cc2d037eb41761b05ad3e69dcb5379c223c07b81c62df5f89190c84ff977390e149566710ce7175e4c2823
+docfiles size=25
+ texmf-dist/doc/latex/a5comb/a5comb.pdf details="Package documentation"
+ texmf-dist/doc/latex/a5comb/a5comb.tex
+runfiles size=1
+ texmf-dist/tex/latex/a5comb/a5comb.sty
+catalogue-ctan /macros/latex/contrib/a5comb
+catalogue-license pd
+catalogue-topics geometry
+catalogue-version 4

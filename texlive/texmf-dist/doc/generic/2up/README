@@ -1,0 +1,5 @@
+2up works with latex (tex) and xelatex (xetex), but not 
+with lualatex (luatex). The package modifies the dvi
+output to get two pages side by side.
+
+hvoss@tug.org

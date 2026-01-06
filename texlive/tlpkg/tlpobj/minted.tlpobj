@@ -1,0 +1,52 @@
+name minted
+category Package
+revision 75223
+shortdesc Highlighted source code for LaTeX
+longdesc The package that facilitates expressive syntax highlighting in
+longdesc LaTeX using the powerful Pygments library. The package also
+longdesc provides options to customize the highlighted source code
+longdesc output using fancyvrb.
+depend catchfile
+depend etoolbox
+depend float
+depend fvextra
+depend latex2pydata
+depend minted.ARCH
+depend newfloat
+depend pdftexcmds
+depend pgf
+depend pgfopts
+depend tools
+depend xcolor
+containersize 1291540
+containerchecksum e57998ad8e22caee3cb7ce394754681eeb9b7ae641b670267f24a91a5c00e437ba205ed1fdb4c838458510bb455f2dae41da46643e1ddf610a42b9724ba2beb4
+doccontainersize 520288
+doccontainerchecksum f3f9e4f74624646ab6a65ee9b48b8e9ad5e41e94c1301afdefa29d297cf758efc960cb1de2f0794d7367eb8a48f37e59bc1c4dc56ff0ae2a123f73369e2aeba9
+docfiles size=143
+ texmf-dist/doc/latex/minted/CHANGELOG_LATEXMINTED_PYTHON_PACKAGE.md
+ texmf-dist/doc/latex/minted/CHANGELOG_MINTED_LATEX_PACKAGE.md
+ texmf-dist/doc/latex/minted/DEPENDS.txt
+ texmf-dist/doc/latex/minted/README details="Readme"
+ texmf-dist/doc/latex/minted/minted.pdf details="Package documentation"
+ texmf-dist/doc/man/man1/latexminted.1
+ texmf-dist/doc/man/man1/latexminted.man1.pdf
+srccontainersize 43108
+srccontainerchecksum 99ba48c573a69587f665f193dd6bb7e553a0a9dee62f55e0362b28657c0e7f6ee098c77c3cb329086cb8b1ad674c2f419fb68efb7f77ce5d683d2567346682f8
+srcfiles size=53
+ texmf-dist/source/latex/minted/minted.dtx
+ texmf-dist/source/latex/minted/minted.ins
+runfiles size=359
+ texmf-dist/scripts/minted/latex2pydata-0.5.0-py3-none-any.whl
+ texmf-dist/scripts/minted/latexminted-0.6.0-py3-none-any.whl
+ texmf-dist/scripts/minted/latexminted.py
+ texmf-dist/scripts/minted/latexrestricted-0.6.2-py3-none-any.whl
+ texmf-dist/scripts/minted/pygments-2.19.1-py3-none-any.whl
+ texmf-dist/tex/latex/minted/minted.sty
+ texmf-dist/tex/latex/minted/minted1.sty
+ texmf-dist/tex/latex/minted/minted2.sty
+catalogue-also texments verbments
+catalogue-contact-repository https://github.com/gpoore/minted
+catalogue-ctan /macros/latex/contrib/minted
+catalogue-license lppl1.3c lppl1.3 bsd3
+catalogue-topics listing verbatim synt-hlt
+catalogue-version 3.7.0

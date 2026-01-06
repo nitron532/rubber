@@ -1,0 +1,47 @@
+\usepackage{ifthen}
+\usepackage{environ}
+\usepackage{draftwatermark}
+\usepackage{tcolorbox}
+\SetWatermarkText{\textbf{}}
+\SetWatermarkScale{2}
+
+\newboolean{solution}
+
+\DeclareOption{true}{
+  \setboolean{solution}{true}
+}
+\DeclareOption{false}{
+  \setboolean{solution}{false}
+}
+% Set default option
+\ExecuteOptions{true}
+
+% Process options
+\ProcessOptions\relax
+
+\newcommand{\solution}[2][]{%
+  \ifthenelse{\boolean{solution}}
+  {{\color{red}#2}} % Show solution
+  {#1} % Optional supplimentary content to show if solution is disabled
+}
+
+\newenvironment{Solution}{
+\begin{tcolorbox}[standard jigsaw, opacityback=0, colframe=black, width=6.7in, arc=0mm, boxrule=1pt]
+\color{red}
+}{
+\end{tcolorbox}
+}
+\newenvironment{Question}{}{}
+\newenvironment{AnswerArea}{
+\begin{tcolorbox}[standard jigsaw, opacityback=0, colframe=black, width=6.7in, arc=0mm, boxrule=1pt]
+}{
+\end{tcolorbox}
+}
+
+\ifsolution
+  \SetWatermarkText{\textbf{SOLUTION}}
+  \RenewEnviron{Question}{}
+  \RenewEnviron{AnswerArea}{}
+\else
+  \RenewEnviron{Solution}{}
+\fi

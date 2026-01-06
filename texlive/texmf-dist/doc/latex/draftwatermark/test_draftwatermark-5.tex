@@ -1,0 +1,43 @@
+%%
+%% This is file `test_draftwatermark-5.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% draftwatermark.dtx  (with options: `samplecode-custom')
+%% 
+\documentclass{article}
+\usepackage[svgnames]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{draftwatermark}
+\usepackage{mathptmx}
+\usepackage[scaled]{helvet}
+\usepackage{lipsum}
+\title{Sample document for the draftwatermark package}
+\author{}
+
+\newsavebox\wmbox
+\savebox\wmbox{%
+  {\color[rgb]{1,0.8,0.8}\sffamily \fbox{DRAFT}}}
+\newcommand\MyWM{%
+  \ifodd\thepage
+    \hspace*{\dimexpr \paperwidth -\wd\wmbox-10mm}%
+    \usebox{\wmbox}%
+  \else
+    \usebox{\wmbox}%
+  \fi}
+
+\DraftwatermarkOptions{anchor=lt, pos={5mm, 5mm}, markcmd=\MyWM}
+\begin{document}
+\maketitle
+
+\section{One}
+\lipsum[1-3]
+
+\section{Two}
+\lipsum[4-6]
+
+\end{document}
+\endinput
+%%
+%% End of file `test_draftwatermark-5.tex'.
