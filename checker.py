@@ -30,34 +30,34 @@ def displayInOrder(d, indent=0): # for test purposes
         else:
             print(" " * (indent + 4) + str(value))
 
-def checkTree(tree): 
+def checkTree(tree, name): 
 #this will grow as i add more requirements
 #if vspace is inside a solution (lowercase?) env, flag it as bad?
     global passedCheck
     #might wanna split these conditions
     if "AnswerArea" not in envCount or "Solution" not in envCount:
-        print("AnswerArea or Solution not found in tex file!")
+        print(f"{name} : AnswerArea or Solution not found.")
         passedCheck = False
         return
     elif envCount["AnswerArea"] != 1 or envCount["Solution"] != 1:
-        print(envCount["AnswerArea"], envCount["Solution"])
+        print(f"{name} : Found {envCount["AnswerArea"]} Answer Areas, and {envCount["Solution"]} Solutions.There should only be one of each.")
         passedCheck = False
         return
     for key,value in tree.items():
         if "AnswerArea" in key:
-            print(value)
             if not value:
                 passedCheck = False
                 return
             for subkey, subvalue in value.items():
                 if "verbatim" in subkey and len(subvalue.items()) == 0:
+                    print(f"{name} : Verbatim found in Answer Area.")
                     passedCheck = False
                     return
         elif "Question" in key:
             passedCheck = False
             return
         if isinstance(value, dict):
-            checkTree(value)
+            checkTree(value, name)
 
 
 def check(pa):
@@ -68,24 +68,21 @@ def check(pa):
     envCount = {}
     passedCheck = True
     with open(pa) as p:
-        print("checking : ", p.name)
         soup = TexSoup(p.read())
         tree = storeAsDict(soup)
-        # displayInOrder(tree)
         if not tree:
-            print("empty tex file")
+            print(f"{p.name} : is an empty tex file.")
             return False 
         elif not passedCheck:
-            print("invalid use of code env (found a whitespace, code env should only be used to describe variables or functions in question description. Use verbatim for question code)")
+            print(f"{p.name} : Invalid use of code env (found a whitespace, code env should only be used to describe variables or functions in question description. Use verbatim for question code)")
             return False
         #one pass loop to iterate through tree in order of insertion (item has to be first )
         for key,value in tree.items():
-            # print(key)
             if key != "item1":
-                print("item not found")
+                print(f"{p.name} : Item not found.")
                 return False
             break
-        checkTree(tree)
+        checkTree(tree,p.name)
         return passedCheck #could return more info since i already have specific error checks
 
 

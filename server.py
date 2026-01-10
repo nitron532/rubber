@@ -1,40 +1,37 @@
-import time
 import subprocess
 import os
 import sys
 import shutil
+import math
 from pathlib import Path
 from checker import check
-passedCheck = True
-"""
-this file size limit will need to vary depending on usage: for feeding to model, it will have to be large, as we are
-uploading around 1000+ files from oldrepo to the thing. once it's in use by teaching team, it will have to be smaller
-"""
+import multiprocessing
 
-# copy directory to some working directory. loop thru each and check. try minimize io operations
-
+counter = 0
+cores = os.process_cpu_count()
 questionFolderPath = Path(sys.argv[1])
-glob_path = questionFolderPath.glob("*") 
+glob_path = questionFolderPath.glob("*")
+globFiles = [f for f in glob_path if f.__str__().find(".tex") != -1]
+nestedPath = Path(f"{questionFolderPath}/files")
+nestedPath.mkdir(parents=True, exist_ok=True)
+perProc = math.ceil(len(globFiles) / cores)
 
-def compile():
-    #resets globals per compile
-    global passedCheck
+def sub_process_compile(globFiles):
+    localCount = 0
+    print("starting process: ", os.getpid())
+    passedCheck = False
     fileNameList = []
     compileList = []
     guidelineList = []
     errorList = []
     result = {"compiledFiles": compileList, "fileNames":fileNameList, "passedFiles": guidelineList, "errors": errorList}
-    nestedPath = Path(f"{questionFolderPath}/files")
-    nestedPath.mkdir(parents=True, exist_ok=True)
-    currentTime = str(time.time())
-    templateFileName = f"template{currentTime[:currentTime.find('.')]}.tex"
+    templateFileName = f"template{os.getpid()}.tex"
     totalPath = Path(f"{nestedPath}/{templateFileName}")
     with open(totalPath, 'w') as f:
         f.writelines(["\\documentclass{article}\n","\\usepackage{format\n}",\
                       "\\usepackage{mc_bubble}\n","\\usepackage{magicswitch}\n","\\begin{document}\n","\\input{}\n","\\end{document}\n"])
 
-    for file in glob_path:
-        passedCheck = False
+    for file in globFiles:
         folder, filename = os.path.split(file)
 
         if(filename == "files"):continue
@@ -59,19 +56,29 @@ def compile():
                 stderr=subprocess.PIPE
             )
             pdf = os.path.exists(os.path.join(nestedPath, f"{templateFileName[:templateFileName.find(".")]}.pdf"))
-            print(f"{filename} compiled? ", pdf)
+            # print(f"{filename} compiled? ", pdf)
             if pdf:
                 result["compiledFiles"].append(True)
                 passedCheck = check(Path(f"{questionFolderPath}/{filename}")) #returns boolean
             else:
                 result["compiledFiles"].append(False)
                 result["passedFiles"].append(False)
-            print("passed check?: ", passedCheck)
-            print()
+            # print("passed check?: ", passedCheck)
+            # print()
             result["passedFiles"].append(passedCheck)
+            if passedCheck: localCount += 1
+            passedCheck = False
+    # print(result)
+    return result, localCount
+
+def main():
+    global counter
+    results = []
+    with multiprocessing.Pool(cores) as p:
+        results = p.starmap(sub_process_compile, [([globFiles[perProc * i: perProc *(i+1)]]) for i in range(cores)])
     shutil.rmtree(nestedPath)
-    print(result)
-    return result
+    for r in results: counter += r[1]
+    print(f"Passed / Total: {counter} / {len(globFiles)} ")
 
-
-compile()
+if __name__ == "__main__":
+    main()
